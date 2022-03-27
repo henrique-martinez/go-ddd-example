@@ -54,14 +54,14 @@ func (r PostgreSQLPetRepository) ListPets(ctx context.Context) ([]domain.Pet, er
 }
 
 func (r PostgreSQLPetRepository) CreatePet(ctx context.Context, pet domain.Pet) error {
-	_, err := r.db.ExecContext(ctx, "insert into pet (id, name, tag) values (?, ?, ?)", pet.Id, pet.Name, pet.Tag)
+	_, err := r.db.ExecContext(ctx, "insert into pet (id, name, tag) values ($1, $2, $3)", pet.Id, pet.Name, pet.Tag)
 	return err
 }
 
 func (r PostgreSQLPetRepository) GetPet(ctx context.Context, id string) (domain.Pet, error) {
 	var name string
 	var tag sql.NullString
-	if err := r.db.QueryRow("select name, tag from pet where id = ?", id).Scan(&name, &tag); err != nil {
+	if err := r.db.QueryRow("select name, tag from pet where id = $1", id).Scan(&name, &tag); err != nil {
 		if err == sql.ErrNoRows {
 			return domain.Pet{}, fmt.Errorf("pet %s not found", id)
 		}
