@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"net/http"
-	"petstore/internal/common/server"
-	"petstore/internal/petstore/ports"
-	"petstore/internal/petstore/service"
+	"petstoreproject/internal/common/logs"
+	"petstoreproject/internal/common/server"
+	"petstoreproject/internal/petstore/ports"
+	"petstoreproject/internal/petstore/service"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -13,6 +14,7 @@ import (
 func main() {
 	ctx := context.Background()
 
+	logs.Init()
 	application := service.NewApplication(ctx)
 
 	server.RunHTTPServer(func(router chi.Router) http.Handler {

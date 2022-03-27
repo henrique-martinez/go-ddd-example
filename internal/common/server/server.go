@@ -3,7 +3,7 @@ package server
 import (
 	"net/http"
 	"os"
-	"petstore/internal/common/logs"
+	"petstoreproject/internal/common/logs"
 	"strings"
 
 	"github.com/go-chi/chi/v5"
@@ -12,7 +12,7 @@ import (
 )
 
 func RunHTTPServer(createHandler func(router chi.Router) http.Handler) {
-	RunHTTPServerOnAddr(":"+os.Getenv("PORT"), createHandler)
+	RunHTTPServerOnAddr(":3030", createHandler)
 }
 
 func RunHTTPServerOnAddr(addr string, createHandler func(router chi.Router) http.Handler) {

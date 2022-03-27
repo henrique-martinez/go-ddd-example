@@ -5,13 +5,13 @@ package ports
 
 // Error defines model for Error.
 type Error struct {
-	Code    int32  `json:"code"`
+	Code    int    `json:"code"`
 	Message string `json:"message"`
 }
 
 // Pet defines model for Pet.
 type Pet struct {
-	Id   int64   `json:"id"`
+	Id   string  `json:"id"`
 	Name string  `json:"name"`
 	Tag  *string `json:"tag,omitempty"`
 }
@@ -22,6 +22,15 @@ type Pets []Pet
 // ListPetsParams defines parameters for ListPets.
 type ListPetsParams struct {
 	// How many items to return at one time (max 100)
-	Limit *int32 `json:"limit,omitempty"`
+	Limit *int `json:"limit,omitempty"`
 }
+
+// CreatePetsJSONBody defines parameters for CreatePets.
+type CreatePetsJSONBody struct {
+	Name string  `json:"name"`
+	Tag  *string `json:"tag,omitempty"`
+}
+
+// CreatePetsJSONRequestBody defines body for CreatePets for application/json ContentType.
+type CreatePetsJSONRequestBody CreatePetsJSONBody
 

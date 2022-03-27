@@ -20,7 +20,6 @@ paths:
           required: false
           schema:
             type: integer
-            format: int32
       responses:
         '200':
           description: A paged array of pets
@@ -44,6 +43,19 @@ paths:
       operationId: createPets
       tags:
         - pets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                tag:
+                  type: string
       responses:
         '201':
           description: Null response
@@ -66,6 +78,7 @@ paths:
           description: The id of the pet to retrieve
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: Expected response to a valid request
@@ -88,8 +101,8 @@ components:
         - name
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
         name:
           type: string
         tag:
@@ -106,6 +119,5 @@ components:
       properties:
         code:
           type: integer
-          format: int32
         message:
           type: string
